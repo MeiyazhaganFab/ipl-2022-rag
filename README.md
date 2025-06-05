@@ -7,7 +7,7 @@
 
 This is not your average data project. This is **RAG** 🧠 + **IPL 2022** 🎉 = 🔥 **Cricket Time Travel** for language models!
 
-We built a RAG pipeline so your favorite LLMs (whose memory tragically ends before IPL 2022) can finally *know what Jos Buttler did last summer*.
+I have built a RAG pipeline so your favorite LLMs (whose memory tragically ends before IPL 2022) can finally *know what Jos Buttler did last summer*.
 
 ### TL;DR:
 
