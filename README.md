@@ -139,4 +139,4 @@ This project exists because LLMs deserve cricket updates too. And now, thanks to
 
 Now go ahead, run it, ask questions, and let the magic unfold! 🧙‍♂️🏏🔥
 
-"The only thing cooler than an LLM answering cricket queries is an LLM answering correct cricket queries."
+<h1>"The only thing cooler than an LLM answering cricket queries is an LLM answering correct cricket queries."</h1>
