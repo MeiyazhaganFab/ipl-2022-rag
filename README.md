@@ -1,9 +1,7 @@
----
 ## 🏏 IPL 2022 RAG Saga: Post-Knowledge-Cutoff Cricket Wisdom
 
 *"Because even LLMs deserve to enjoy the IPL drama after their training ends!"* 😎 — A wise AI wrangler
 
----
 
 ## 🤔 What Is This?
 
@@ -15,7 +13,6 @@ We built a RAG pipeline so your favorite LLMs (whose memory tragically ends befo
 
 📄 **Raw CSVs** → 🧠 **Human-ish Summaries** → 💾 **FAISS Vector Store** → 🧙‍♂️ **LLM Sorcery** → 🎤 **Post-match insights with sass**
 
----
 
 ## 🎬 The IPL Magic: Code Breakdown
 
@@ -25,7 +22,6 @@ We built a RAG pipeline so your favorite LLMs (whose memory tragically ends befo
 | 📦 `create_vector_store.py` | Embeds and stores those spicy summaries into a FAISS vector store. |
 | 🔮 `rag_pipeline.py` | Retrieves relevant player intel and generates smart answers with LLMs. |
 
----
 
 ## 🧙‍♂️ Prerequisites (a.k.a. Ritual Requirements)
 
@@ -36,7 +32,6 @@ Before you summon the cricket gods, make sure your spellbook (read: system) cont
 * ⚡ Internet to pull models (unless you're Gandalf and already have them)
 * ❤️ Love for cricket (not required, but highly recommended for full enlightenment)
 
----
 
 ## 🧪 Installation: Light the Fire
 
@@ -61,7 +56,6 @@ Before you summon the cricket gods, make sure your spellbook (read: system) cont
     ```
     * **Note:** You'll need to create a `requirements.txt` file in the root directory of your project if it doesn't exist. It should list all the Python libraries your project depends on (e.g., `pandas`, `langchain`, `faiss-cpu`, `ollama`).
 
----
 
 ## 🛠️ How to Cast the Spell (a.k.a. Run the Code)
 
@@ -89,7 +83,6 @@ python rag_pipeline/rag_pipeline.py --user_query "how many runs did Buttler scor
 
 🔍 Retrieves summaries + 🧙‍♂️ channels LLM wisdom = 💬 answers.
 
----
 
 ## 💡 Example Queries
 
@@ -98,7 +91,6 @@ python rag_pipeline/rag_pipeline.py --user_query "how many runs did Buttler scor
 * "Give me Buttler’s stats like I’m five."
 * "Highest score of Hardik Pandya?"
 
----
 
 ## 🧪 Project Structure (a.k.a. Code Playground)
 
@@ -116,7 +108,6 @@ ipl-2022-rag/
 └── README.md                       # You’re reading it, legend
 ```
 
----
 
 ## 🤖 Models Used
 
@@ -125,7 +116,6 @@ ipl-2022-rag/
 
 **⚠️ Make sure these are available in your Ollama instance.**
 
----
 
 ## 🤝 Contributions
 
@@ -137,13 +127,11 @@ Raise an issue if:
 * You want to suggest a cool new feature.
 * You’re emotionally moved by Buttler’s batting and want to talk.
 
----
 
 ## 📜 License
 
 MIT License. Because cricket insights should be free like Dhoni's helicopter shots. 🛫
 
----
 
 ## 🏁 Final Words
 
@@ -152,5 +140,3 @@ This project exists because LLMs deserve cricket updates too. And now, thanks to
 Now go ahead, run it, ask questions, and let the magic unfold! 🧙‍♂️🏏🔥
 
 "The only thing cooler than an LLM answering cricket queries is an LLM answering correct cricket queries."
-
----
