@@ -62,7 +62,7 @@ Before you summon the cricket gods, make sure your spellbook (read: system) cont
 ### 🔹 Step 1: Preprocess the CSV
 
 ```bash
-python rag_pipeline/preprocessing_data.py --input_csv_file_path ./data/IPL_2022.csv --output_text_file_path ./data/IPL_2022_summary.txt
+python rag_service/preprocessing_data.py --input_csv_file_path ./data/IPL_2022.csv --output_text_file_path ./data/IPL_2022_summary.txt
 ```
 
 🎤 This step whispers the truth of IPL 2022 into a language LLMs understand.
@@ -70,7 +70,7 @@ python rag_pipeline/preprocessing_data.py --input_csv_file_path ./data/IPL_2022.
 ### 🔹 Step 2: Create the Vector Store
 
 ```bash
-python rag_pipeline/create_vector_store.py --input_summary_file_path ./data/IPL_2022_summary.txt --embedding_model granite-embedding:30m --output_vector_store_path ./vector_store --output_vector_store_index_name ipl_2022
+python rag_service/create_vector_store.py --input_summary_file_path ./data/IPL_2022_summary.txt --embedding_model granite-embedding:30m --output_vector_store_path ./vector_store --output_vector_store_index_name ipl_2022
 ```
 
 🧠 Embeds cricket knowledge into the RAG engine.
@@ -78,10 +78,18 @@ python rag_pipeline/create_vector_store.py --input_summary_file_path ./data/IPL_
 ### 🔹 Step 3: Ask LLMs the Unanswerable (Until Now)
 
 ```bash
-python rag_pipeline/rag_pipeline.py --user_query "how many runs did Buttler score?" --embedding_model granite-embedding:30m --chat_model gemma3:4b --output_vector_store_path ./vector_store --output_vector_store_index_name ipl_2022
+python rag_service/rag_pipeline.py --user_query "how many runs did Buttler score?" --embedding_model granite-embedding:30m --chat_model gemma3:4b --output_vector_store_path ./vector_store --output_vector_store_index_name ipl_2022
 ```
 
 🔍 Retrieves summaries + 🧙‍♂️ channels LLM wisdom = 💬 answers.
+
+### 🔹 Step 4: If you want to run the fastapi integration
+
+```bash
+uvicorn api_main:api_app
+```
+
+🚀 Now, request "http://127.0.0.1:8000" with "/ragit" endpoint for response.
 
 
 ## 💡 Example Queries
@@ -99,13 +107,19 @@ ipl-2022-rag/
 ├── data/
 │   ├── IPL_2022.csv                # Your raw player stats
 │   └── IPL_2022_summary.txt        # LLM-readable summaries
-├── fast-api/                       # On the way (future feature)
-├── rag_pipeline/
-│   ├── vector_store/               # Saved FAISS vector index
+├── vector_store/                   # Saved FAISS vector index
+├── api/
+│   ├── routes.py                   # routes for the api
+├── models/
+│   ├── request.py                  # request model for the api endpoints
+│   ├── response.py                 # response model for the api endpoints
+├── rag_service/
 │   ├── preprocessing_data.py       # CSV → Text
 │   ├── create_vector_store.py      # Text → FAISS
 │   └── rag_pipeline.py             # Ask LLMs like a boss
-└── README.md                       # You’re reading it, legend
+├── README.md                       # You’re reading it, legend
+├── api_main.py                     # main app for fastapi
+└── requirements.txt                # libs needed
 ```
 
 

@@ -15,8 +15,8 @@ def set_up_vector_store_retriver(args):
     """
     set up vector store as retriever  
     """
-
     ollama_embed = OllamaEmbeddings(model=args.embedding_model, show_progress=True)
+
     vector_store = FAISS.load_local(folder_path=Path(args.output_vector_store_path).resolve(),
                                 index_name=args.output_vector_store_index_name,
                                 embeddings=ollama_embed,
@@ -39,6 +39,23 @@ def set_up_multi_query_retriever(chat_model, retriever):
     return multi_query_retriver
 
 
+def create_chain(chat_model):
+    # chain for generation 
+    ollama_model = ChatOllama(model=chat_model, temperature=0.5, num_predict=300)
+    genaration_prompt = HumanMessagePromptTemplate.from_template(template="""Here are few data for the context to answer question that are asked later
+{context_data}
+
+
+based on the above the context answer below question:
+{query}
+""")
+    prompt_template = ChatPromptTemplate.from_messages([genaration_prompt])
+
+    generation_chain = prompt_template | ollama_model
+
+    return generation_chain
+
+
 def rag_query(query, mq_retriever, chain):
     """
     Retrieve, Augment and Generate for the given query and retriever
@@ -54,6 +71,8 @@ def rag_query(query, mq_retriever, chain):
     print("Generating ...")
     result = chain.invoke({'context_data': context,
                          'query':query})
+    
+    print("Completed!!")
 
     return result
 
@@ -74,18 +93,7 @@ def main(args):
     # set multi query retriever
     multi_query_retriever = set_up_multi_query_retriever(args.chat_model, retriever)
 
-    # chain for generation 
-    ollama_model = ChatOllama(model=args.chat_model, temperature=0.5, num_predict=300)
-    genaration_prompt = HumanMessagePromptTemplate.from_template(template="""Here are few data for the context to answer question that are asked later
-{context_data}
-
-
-based on the above the context answer below question:
-{query}
-""")
-    prompt_template = ChatPromptTemplate.from_messages([genaration_prompt])
-
-    generation_chain = prompt_template | ollama_model
+    generation_chain = create_chain(args.chat_model)
 
     # calling rag
     result = rag_query(args.user_query, multi_query_retriever, generation_chain)
